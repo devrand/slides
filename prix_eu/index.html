@@ -1,0 +1,238 @@
+<html>
+	<head>
+		<title>Leprosy of the Land, presentation</title>
+	    <meta charset="UTF-8">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css">
+		<link href="https://fonts.googleapis.com/css?family=Anonymous+Pro|Roboto+Condensed:700&amp;subset=cyrillic" rel="stylesheet"> 
+		<style>
+		.text {
+
+			    position: absolute;
+			    width: 80%;
+			    bottom: 0%;
+			    left: 18%;
+			    pointer-events: none;
+			    font-size: 2em;
+			    font-family: 'Roboto Slab', serif;
+			    font-weight: 700;	
+			    background-color: rgba(255,255,255, 0.9);
+			}
+
+		div, p, h4 {
+  			text-align: left;
+  			font-size: 0.6em;
+			font-family: 'Anonymous Pro', monospace;
+		}	
+
+		p.title{
+			font-size: 2em;
+			font-weight: 700;	
+			font-family: 'Roboto Condensed', serif;
+			margin-bottom: 1em;
+			
+		}	
+
+		body{
+			font-size: 0.8em;
+			font-family: 'Anonymous Pro', monospace;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section data-slidenum=1>
+					<p class="title">Leprosy of the Land</p>
+					<!--p>Scary consequences of illegal amber mining.</p--><p> Project by Data Journalism Agency (Texty.org.ua)</p>
+				</section>
+
+				<section data-slidenum=2>
+					<p class="title">Polissya, North-Western part of Ukraine</p>
+					<p>This region has large deposits of amber, close to surface</p>
+				</section>
+
+				<section data-slidenum=2.1>
+					<img src="./img/amber-map-2.png" width="800px">
+				</section>
+
+				<!--section data-slidenum=2.1>
+				<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/2A7tfIPuNqq8PVcMh1?video=0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/2A7tfIPuNqq8PVcMh1">via GIPHY</a></p>
+				</section-->
+
+
+				<section data-slidenum=3>
+					<p class="title">World prices for amber surged since 2010</p>
+					<p>In 2016 there was a three-times increase comparing to 2010</p>
+				</section>
+
+
+				<section data-slidenum=4>
+					<p class="title">In 2012 "amber rush" started</p>
+					<p>North-Western of Ukraine became "Wild North-West"</p>
+				</section>
+
+				<section data-slidenum=5>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cBtAcvLQcO8?rel=0&amp;showinfo=0&amp;start=28" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				</section>
+
+				<!--section data-slidenum=4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Qu_AIRMWC1E?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				</section-->
+				<section data-slidenum=6>
+					<p class="title">Social and ecological disaster</p>
+					<p>At the peak of popularity, in 2016, there were about 50,000 people working for illegal amber extraction. Crimes, bribes, anarchy surged.</p>
+				</section>
+
+
+
+				<section data-slidenum=7>
+					<p class="title">Lunar Klondike</p>
+					<p>Thousands of people with motorised water pumps and showels transformed land into lifeless, lunar-like landscapes </p>
+				</section>
+
+
+
+
+				<section data-slidenum=8>
+					<img src="./img/marsian_after.jpg"  width="1881">
+					<p class="photo-caption">Image credits: National Geographic</p>
+				</section>
+				
+
+				<section data-slidenum=9>
+					<p class="title">What is the real scale of the problem?</p>
+					<p>We’ve got some reports and scary pictures, but not much reliable info</p>
+				</section>
+
+				<section data-slidenum=10>
+					<p class="title">What is the real scale of the problem, 2?</p>
+					<p>Total area of a region is about 75,000 km, the size of Czech Republic</p>
+				</section>
+
+
+				<section data-slidenum=12>
+					<p class="title">Could we use satellite images?</p>
+					<p>After research, we found we need only high resolution images: 0.8 m per pixel (biggest zoom from online map). Price for half-a-year old images for this area would be ~1 million US dollars</p>
+				</section>
+
+				<section data-slidenum=13>
+					<p class="title">Is there another option?</p>
+					<p>Yes, online map services like Google or Mapbox have a decent satellite photos, aged 2-5 years</p>
+				</section>
+
+				<section data-slidenum=14>
+					<p class="title">Bing maps</p>
+					<p>Best option in our case - most of photos were made in 2015, some in 2014 and 2016 - these were years with most intensive extraction of amber</p>
+				</section>
+
+				<section data-slidenum=15>
+					<p class="title">What to do with half a million of images?</p>
+					<p>The only option in our case - create a computer model to search authomatically for traces of amber extraction, on all this huge amount of photos</p>
+				</section>
+
+				<section data-slidenum=16>
+					<p class="title">Computer model</p>
+					<p>Deep Neural Network - model is based on recent advances in Artificial Intelligence (AI)</p>
+
+				</section>
+
+				<section data-slidenum=17>
+					<p class="title">What to look on satellite photos?</p>
+					<p>We made a couple of interviews with environmental activists, to figure how places of amber extraction could look on aerial images</p>
+				</section>
+
+				<section data-slidenum=18>
+                                        <img src="./img/amber-map-3.png" width="800px">
+                                </section>
+
+
+				<section data-slidenum=19>
+					<p class="title">Learn by example</p>
+					<p>We manually selected two initial set of images: with amber extraction and without it (positive and negative examples). Totally there were couple of thousands of examples, but with smaller images</p>
+				</section>
+
+				<section data-slidenum=20>
+					<p class="title">Learn by example, 2</p>
+					<p>We programmed a computer model, and trained it on those initial set of images</p>
+				</section>
+
+				<section data-slidenum=21>
+					<p class="title">Automatic search</p>
+					<p>It took approximately 60 hours for our model to process all images.We created interactive, online map with all places found</p>
+				</section>
+
+				<section data-slidenum=22>
+					<p class="title">Not quite correct</p>
+					<p>First version of model misclassified about 20% of all found extraction places:we were corrected by early users of our map. We re-trained our model using new set of initial images (we excluded photos with specific type of deforestation, from our initial training set, which looks similar to amber mining )</p>
+				</section>
+
+
+				<section data-slidenum=23>
+					<p class="title">Current version</p>
+					<p>So in our project we created first, most complete interactive map of illegal amber extraction. We did a first reliable estimation of impacted area, too (thousands of hectares)</p>
+				</section>
+
+
+				<section data-slidenum=24>
+					<p class="title">Design, 1</p>
+					<p>We decided to intermix images of amber extraction with text from our article. Tetris-like images flow with a text of an article and finally got a place on main interactive map on the bottom of page</p>
+				</section>
+				
+				<section data-slidenum=25>
+                                        <img src="./img/tetris.png" width="400px">
+                                </section>
+				
+				<section data-slidenum=26>
+					<p class="title">Design, 2</p>
+					<p>We decided to interactively blend text of article with a map images, too  - to make transitions between map and text most natural for the reader. Click on any of images in article and you will be transferred to corresponding place from map. After using map you could return to the same place in article.
+</p>
+				</section>
+
+				<section data-slidenum=27>
+<iframe data-src="http://texty.org.ua/d/2018/amber_eng/" width="100%" height="600px"></iframe>
+				</section>
+
+				
+
+				<section data-slidenum=28>
+                                         <p class="title">Open & reproducible methodology</p>
+                                        <p>We open-sourced our methodology and published computer code needed to train similar models to find any places of interests on satellite/aerial images</p>
+                                </section>
+
+				
+				<section data-slidenum=29>
+                                         <p class="title">Reception</p>
+                                        <p>Project was cited as visualization of the month by Visualisingdata.com and Global Investigative Journalism Network</p>
+                                </section>
+
+
+				<section data-slidenum=30>
+                                         <p class="title">Reception, 2</p>
+                                        <p>We started new wave of discussion about this problem and with a help of activists and environmental experts we produced policy brief with recommendation how to approach this problem, ie easy licensing, developing of local amber market etc</p>
+                                </section>
+
+				<section data-slidenum=31>
+                                         <p class="title">Reception, 3</p>
+                                        <p>Despite amber extraction is decreased in last two years, anyway the scale of this still very big.</p>
+                                </section>
+				
+				<section data-slidenum=32>
+                                         <p class="title">Who we are</p>
+                                        <p>Data Journalism Agency (or Texty.org.ua): is a small online media (ten people in newsroom) from Kyiv, Ukraine, specializing in data journalism </p>
+                                </section>
+
+				<section data-slidenum=33>
+                                         <p class="title">The End</p>
+                                        <p> Thank you for attention!</p>
+                                </section>
+
+			</div>
+		</div>
+		<script src="js/reveal.js"></script>
+		<script>
+			Reveal.initialize();
+		</script>
+	</body>
+</html>

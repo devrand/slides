@@ -1,0 +1,2 @@
+decktape --slides 26-33  generic  http://localhost:8000/index.html out26-33.pdf
+gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf out1-6.pdf out7-12.pdf out12-18.pdf out19-25.pdf out26-33.pdf
