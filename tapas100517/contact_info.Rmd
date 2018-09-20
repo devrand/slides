@@ -1,0 +1,10 @@
+---
+title: "Contacts"
+output: html_notebook
+---
+
+
+## Анатолій Бондаренко, @dvrnd
+## 
+##  R notebook з презентацією знаходиться 
+# https://github.com/devrand/tapas100517

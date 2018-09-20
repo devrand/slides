@@ -1,0 +1,204 @@
+---
+title: "Apache Drill & R ('sergeant')"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+Аналіз великих файлів за допомогою dplyr-like API для Apache Drill - пакета "sergeant" 
+
+[based on this](https://rud.is/b/2017/01/22/create-parquet-files-from-r-data-frames-with-sergeant-apache-drill-a-k-a-make-parquet-files-great-again-in-r/)
+
+### 1. Drill + Parquet-формат потрібен для швидкості (в 10 разів ніж .Rda)
+
+```{r, message=FALSE, warning=FALSE}
+#install.packages("sergeant")
+library(sergeant)
+library(tidyverse)
+library(microbenchmark)
+
+# connect to drill instance
+db <- src_drill("localhost")
+```
+
+### Якщо у вас немає parquet-файла, то створімо його ( інакше переходимо до п. 2 )
+В конфігурації Drill додамо воркспейс для parquet-даних 
+
+```
+"workspaces": {
+    ...
+    "pq": {
+      "location": "/home/you/project/parquet_dir",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    }
+  }
+   ...
+```
+
+
+### Але що робити, якщо Drill не хоче читати битий файл?
+Знайти проблему з csvlint та видалити за допомогою sed!
+
+```
+# GO binary
+csvlint filename.csv 
+# Record #66357121 has error: wrong number of fields in line
+# ...
+# file is valid
+
+sed '66357121d' filename.csv > new.csv
+```
+
+
+### Створимо parquet-файли з CSV, якщо у вас ще їх немає
+```
+
+# make the parquet file, from ~110 MBt csv
+dbGetQuery(db$con, "
+CREATE TABLE dfs.pq.`/guide/traffic.parquet` AS 
+  (SELECT UNIT_NO unit_no, 
+   cast(NOW_DATETIME AS TIMESTAMP) unit_time, 
+   cast(LONGITUDE AS double) lon,
+   cast(LATITUDE AS double) lat, 
+   cast(SPEED AS float) speed
+   FROM dfs.csv.`/2016-07-20_w_header.csv`)
+")
+
+
+
+# bigger, please (10.5GB)
+dbGetQuery(db$con, "
+CREATE TABLE dfs.pq.`/guide/traffic_big.parquet` AS 
+  (SELECT 
+   cast(UNIT_NO AS VARCHAR(16)) unit_no, 
+   cast(NOW_DATETIME AS TIMESTAMP) unit_time, 
+   cast(LONGITUDE AS double) lon,
+   cast(LATITUDE AS double) lat, 
+   cast(SPEED AS float) speed
+   FROM dfs.csv.`/foo.csv`)
+")
+
+
+
+```
+
+
+До речі, Drill зберігає таблиці по замовчуванню у parquet-форматі. Однак, якщо вам потрібно зберігти наприклад у JSON, тоді потрібно трохи змінити конфігурацію:
+```
+ALTER SESSION SET `store.format`='json';
+```
+
+
+### 2. Аналіз, приклад
+   Середня швидкість
+   
+```{r, message=FALSE, warning=FALSE}
+
+# prepare table (it dodn't read it yet)
+traffic <- tbl(db, "dfs.pq.`/guide/traffic.parquet`")
+
+
+# перевіримо, чи щось є
+count(traffic, unit_no ) %>%
+  collect()  # дуже важливо, collect!
+
+
+traffic %>%
+  group_by( unit_no)  %>%
+  filter(speed > 0) %>%
+  summarise( av_speed = mean(speed) ) %>%
+  collect() %>% # collect force execution of db-query
+  pull(av_speed) %>% # do u know wtf is pull() ???
+  hist( breaks = 50)
+
+
+```
+
+
+
+### Просто швидкість
+
+```{r}
+# Це єдиний фрагмент для якого я так і не дочекався (після 20 хвилин), щоб запит виконався, коли дані 
+# були з великого файлу (60 млн записів)
+# ВСІ ІНШІ фрагменти коду виконувалися і для такого розміру даних
+
+traffic %>%
+  filter(speed > 0) %>%
+  #select(av_speed) %>%
+  collect() %>% # collect force execution of db-query
+  sample_n(100000) %>%
+  pull(speed) %>% # do u know wtf is pull() ???
+  hist( breaks = 100)
+
+
+
+```
+
+... або знайдем маршрутки з найбільшою середньою швидкістю
+
+```{r}
+
+
+# виберемо дані по найшвидших десять маршруток, не самий оптимальний спосіб
+# 
+# traffic %>%
+#   group_by( unit_no)  %>%
+#   summarise( av_speed = mean(speed) ) %>%
+#   arrange(desc(av_speed) ) %>% 
+#   #select(av_speed) %>%
+#   collect() %>% # collect force execution of db-query
+#   head(10) %>%
+#   left_join(select(traffic, unit_no, speed), copy = TRUE) -> top_10 # 
+
+# по-іншому
+top_n <- function(n){ 
+  
+  tbl(db, "dfs.pq.`/guide/traffic_big.parquet`") %>%
+    filter(speed > 0) %>%
+    group_by( unit_no)  %>%
+    summarise( av_speed = mean(speed) ) %>%
+    arrange(desc(av_speed) ) %>% 
+    #select(av_speed) %>%
+    collect() %>% # collect force execution of db-query
+    head(n) 
+  
+}
+
+
+filtered <- top_n(10) %>%
+  pull(unit_no) 
+
+
+top_10 <- traffic %>%
+   filter(unit_no  %in%  filtered ) %>%
+   collect()
+
+
+```
+
+
+... і побудуємо для них розподіл швидкостей
+
+```{r, fig.height=5, fig.width=10}
+
+# подивимося на розподіл
+ggplot(top_10, aes(x=speed)) +
+  geom_histogram() +
+  facet_grid(~unit_no)
+
+# TODO: 
+# drill_set() etc
+# drill_connection() %>% drill_show_files("dfs.pq.`/guide`") # show files in parquet workplace
+```
+
+
+### Інструменти
+* [csvlint](https://github.com/Clever/csvlint)
+* sed, awk
+
+### MEMO:
+* collect() - реально виконує запити до БД, сформовані до цього дієсловами dplyr
+* pull(column) - перетворює колонку з tibble-об'єкта на вектор
+

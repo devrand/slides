@@ -1,0 +1,229 @@
+---
+title: "Diamonds R forever?!"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+# "Diamonds R forever?!"
+ 
+Ми починаємо, як завжди, з необхідних бібліотек 
+ 
+```{r, message=FALSE, warning=FALSE}
+#install.packages('tidyverse')
+#install.packages('GGally')
+#install.packages('ggplot2')
+#install.packages('scales')
+#install.packages('memisc')
+
+library(tidyverse)
+library(ggplot2)
+library(GGally)
+library(scales)
+data(diamonds)
+```
+
+
+
+Подивимося на дані:
+
+```{r}
+diamonds %>% tbl_df()
+```
+
+
+
+Зробим вибірку, для того щоб збільшити швидкість
+
+```{r, message=FALSE, warning=FALSE}
+df <- diamonds %>%
+  sample_n(5000) %>%
+  tbl_df()
+```
+
+
+
+
+```{r, fig.height=12, fig.width=12, message=FALSE, warning=FALSE}
+df %>% ggpairs( )
+```
+
+Вище - дуже цікавий графік, варто його більш детально розгледіти. Нас цікавить ціна, тому дивимося на відповідну колонку. Є кореляція з color, clarity. Але головним чином ціна залежить від carat, x, y, z (нелінійно)
+
+
+
+
+
+Отже, залишимо лише ці змінні
+
+```{r, echo=TRUE, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+df %>% 
+  select(price, carat, x, y, z, color, clarity) %>%
+  ggpairs()
+```
+
+
+
+
+На що звернути увагу (купа можливих історій)
+
+* Піки на розподілі каратності
+* колір та чистота(clarity)  корелюють з каратністю (вагою у каратах)?
+* на діамантах більшого розміру розкид ціни збільшується - скоріш за все, попит низький і пропозиції не конкурують між собою
+
+
+Часто, як в нашому випадку, монетарна змінна розкидана на декілька порядків величин та сильно викривлена в сторону менших цін. Це може бути викликано декількома механізмами:
+
+* "залежність від шляху" (а.к.а. "багатші стають багатшими")
+* мультиплікацінйими процесами (інфляція протягом багатьох років)
+
+(до речі, звідси походження power laws / логнормального розподілу)
+Сильно зсунутий розподіл цін проситься на логарифмічну шкалу:
+Спочатку, стандартна гістограма:
+
+```{r, fig.width=10, message=FALSE, warning=FALSE}
+library(gridExtra)
+p1 <- 
+  df %>% 
+  ggplot(aes(x=price)) +  
+  geom_histogram(bins=200) + 
+  theme_bw()
+
+
+p2 <- 
+  df %>% 
+  ggplot(aes(x=price)) +  
+  scale_x_log10() +
+  geom_histogram(bins=200) + 
+  theme_bw()
+
+grid.arrange(p1, p2, ncol = 2, nrow = 1)
+```
+
+З картинки правруч (це таж гістограма, але в логарифмічному масштабі цін) видно, що ми маємо два ринка - для багатих і для "бідних", з піками на різних значеннях
+(Питання - що це за провалля(тріщина) в районі ~1200 доларів?)
+
+
+
+
+
+Карат пропорційний x * y * z, що буде якщо взяти корінь кубічний з карату?
+
+```{r}
+cubroot_trans = function() trans_new('cubroot', transform= function(x) x^(1/3), inverse = function(x) x^3 )
+ 
+p <- df %>%
+    ggplot( aes(x=carat, y=price) ) +
+    scale_x_continuous(trans=cubroot_trans(), limits = c(0.2,3),
+        breaks = c(0.2, 0.5, 1, 2, 3)) +
+    scale_y_continuous(trans=log10_trans(), limits = c(350,15000),
+        breaks = c(350, 1000, 5000, 10000, 15000)) +
+    geom_point() +
+    theme_bw() +
+    ggtitle('Ціна (log10) від кореня3 ваги')
+
+p
+
+
+
+
+```
+Чудово! Після трансформації по Х та У ми отримали майже лінійну залежність!
+Бачите розриви на "красивих", "круглих" значеннях каратності?
+
+
+
+Щоб побороти занадто велику густину точок на графіку, давайте зменшимо їх прозорість та розмір - параметри alpha та size для функції
+geom_point()
+
+```{r}
+p = ggplot( data=diamonds, aes(carat, price)) +
+    geom_point(alpha = 0.2, size = .75, position='jitter') +
+    scale_x_continuous(trans=cubroot_trans(), limits = c(0.2,3),
+        breaks = c(0.2, 0.5, 1, 2, 3)) +
+    scale_y_continuous(trans=log10_trans(), limits = c(350,15000),
+        breaks = c(350, 1000, 5000, 10000, 15000)) +
+    theme_bw() +
+    ggtitle('Ціна (log10) від кореня3 ваги')
+p
+```
+
+
+
+Додамо колір на графік, щоб побачити як залежить ціна ще й від чистоти
+
+```{r, fig.height=6, fig.width=8}
+p <- diamonds %>%
+    ggplot(  aes(carat, price, colour=clarity)) +
+    geom_point(alpha = 0.5, size = .75) +
+    scale_colour_brewer(type = 'div', palette = 5,
+        guide = guide_legend(title = NULL, reverse=T)) +
+    scale_x_continuous(trans=cubroot_trans(), limits = c(0.2,3),
+        breaks = c(0.2, 0.5, 1, 2, 3)) +
+    scale_y_continuous(trans=log10_trans(), limits = c(350,15000),
+        breaks = c(350, 1000, 5000, 10000, 15000)) +
+    theme_bw() + theme(legend.key = element_blank()) +
+    labs(title = "Діаманти назавжди", subtitle = 'Залежність ціни (log10) від кубічного кореня ваги та чистоти')
+  #ggtitle('Price (log10) by Cubed-Root of Carat and Color')
+p
+```
+Видно, що ціна в кожній вертикальній групі точок чітко розкладається по кольорам від синього до червоного в залежності від чистоти. Тобто, чистота - хоч і не настільки сильно впливає на ціну як розмір, але також впливає
+
+
+
+Наостанок, можна подивитися як ціна залежить від кольору каменів (змінна color)
+
+```{r}
+p <- diamonds %>%
+    ggplot(  aes(carat, price, colour=color)) +
+    geom_point(alpha = 0.5, size = .75) +
+    scale_colour_brewer(type = 'div', palette = 7, direction = -1,
+        guide = guide_legend(title = NULL, reverse=F)) +
+    scale_x_continuous(trans=cubroot_trans(), limits = c(0.2,3),
+        breaks = c(0.2, 0.5, 1, 2, 3)) +
+    scale_y_continuous(trans=log10_trans(), limits = c(350,40000),
+        breaks = c(350, 1000, 5000, 10000, 15000)) +
+    theme_bw() + theme(legend.key = element_blank()) +
+    labs(title = "Діаманти назавжди", subtitle = 'Залежність ціни (log10) від кубічного кореня ваги та кольору каменів')
+  #ggtitle('Price (log10) by Cubed-Root of Carat and Color')
+p
+```
+Бачимо, що від кольору(насправді це жовтизна - чим вона більше, тим менше вартість) ціна залежить не так сильно, як від чистоти каменю. Лише на великих розмірах - після одного карату, цей фактор починає суттєво впливати на ціну.
+
+
+Мінімальна версія попереднього графіка (якщо викинути масштабування, заголовки тощо)
+Можна добре побачити, якою анатомія графіка в ggplot
+
+```{r}
+diamonds %>% # 1. спочатку дані
+    # 2. потім "естетика", тобто
+    # у який спосіб ми показуємо кожну цікаву змінну. На цей раз 
+    # вагу в каратах показуємо по вісі X,
+    # ціну - по вісі Y,
+    # color діамантів - ( color, from J (worst) to D (best)) це насправді, наскільки він 
+    # прозорий - показуємо, правильно, кольором
+    ggplot(  aes(x = carat, y = price, colour=color)) +
+    # 3. нарешті задаємо геометрію (яким буде тип графіка?). цей - точковий, або діаграма розсіяння
+    geom_point() +
+    # 4. шкала (для кольору )
+    scale_colour_brewer(type = 'div', palette = 5) 
+    
+```
+
+Плюч цього варіанта - всього лише три строчки коду. Мінус - без трансформацій X та Y
+робити аналіз не так зручно.
+
+:tada: :tada: :tada:
+
+### Отже, підсумуємо - які потенційні історії можуть бути з цього набору даних?
+
+* Є два ринка - для багатих і для "бідних", з піками цін на камінці на різних значеннях
+* Ціна на камені залежить від ваги, чистоти та кольору (у порядку зменшення важливості)
+* В даних відсутні повністю діаманти з ціною в районі 
+1200 доларів - там на графіку "тріщина". Це може бути - помилка в даних, або якесь цікаве пояснення
+* Люди схильні купувати  (або ювеліри схильні гранити) камені, що мають трохи більшу або рівну вагу, що дорівнює круглим значенням каратів: 0.5, 1, 2. Каменів з вагою трохи меншою, ніж такі значення, практично немає.    
+
+
+Чого не вистачає? динаміки цін - залишається для домашньої роботи
+
+Ідея та приклади позичені з блога Solomon Messing
