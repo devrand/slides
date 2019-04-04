@@ -1,6 +1,6 @@
 ### Журналістика та алгоритми NLP
 
-
+<br><br>
 
 # 1.  
 [Форма історій. Існує 6 універсальних форм, аналіз близько 2000 класичних творів](http://www.bbc.com/culture/story/20180525-every-story-in-the-world-has-one-of-these-six-basic-plots). [Практичний приклад, R](https://juliasilge.com/blog/you-must-allow-me/)
@@ -8,7 +8,7 @@
 ![Із князі у грязі](http://ichef.bbci.co.uk/wwfeatures/wm/live/1600_900/images/live/p0/68/67/p06867yw.jpg)
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 # 2.
 
@@ -17,7 +17,7 @@
 ![латентні стилі](https://multithreaded.stitchfix.com/assets/posts/2018-06-28-latent-style/matrixfactorization.png)
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 # 3. 
 
@@ -25,7 +25,7 @@
 (Create table of contents for millions of docs, paragraph classification task)
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 
 
@@ -35,7 +35,7 @@
 
 ![сентиментальний нейрон](https://openai.com/content/images/2017/04/image03-1.png)
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 
 # 5.
@@ -43,7 +43,7 @@
 Наш проект про [сміттєві сайти](http://texty.org.ua/d/2018/mnews/)
 ![picture](bad_news.png)
 
-
+<br><br><br><br><br><br>
 
 
 # 6. 
@@ -51,7 +51,7 @@
 ![тренди](https://www.tjpalanca.com/figures/20170309-news-landscape-map.png)
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 # 7. 
 Декілька прикладів від Дана Журавського, [NLP для аналізу повсякденної мови](https://vimeo.com/193477678) 
@@ -60,20 +60,20 @@
 
 ![еволюція](juraffski_word_meaning.png)
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 
 8. [GPT-2](https://openai.com/blog/better-language-models/) 
 [TWDNE](https://www.gwern.net/TWDNE)
 
 
-!()[twdne.png]
+![](twdne.png)
 
 
 
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
 
 
