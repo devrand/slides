@@ -38,13 +38,23 @@
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
 
-5. [Як шукати тренди в новинах](https://www.tjpalanca.com/2017/03/facebook-news-topic-modeling.html) 
+# 5.
+
+Наш проект про [сміттєві сайти](http://texty.org.ua/d/2018/mnews/)
+![picture](bad_news.png)
+
+
+
+
+# 6. 
+[Як шукати тренди в новинах](https://www.tjpalanca.com/2017/03/facebook-news-topic-modeling.html) 
 ![тренди](https://www.tjpalanca.com/figures/20170309-news-landscape-map.png)
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
-6. Декілька прикладів від Дана Журавського, [NLP для аналізу повсякденної мови](https://vimeo.com/193477678) 
+# 7. 
+Декілька прикладів від Дана Журавського, [NLP для аналізу повсякденної мови](https://vimeo.com/193477678) 
  - Завдяки embedding ми можемо відслідковувати як змінюється значення слова із часом (є навіть формула, які слова найсильніше зміняться з часом?)
  - 
 
@@ -53,18 +63,23 @@
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
 
-7. [GPT-2](https://www.vox.com/future-perfect/2019/2/14/18222270/artificial-intelligence-open-ai-natural-language-processing), [Курс News Algorithms](https://journalismcourses.org/resource/alg0119.html) 
+8. [GPT-2](https://openai.com/blog/better-language-models/) 
+[TWDNE](https://www.gwern.net/TWDNE)
+
+
+!()[twdne.png]
+
+
+
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
 
-8. Наш проект про [сміттєві сайти](http://texty.org.ua/d/2018/mnews/)
 
 
-![picture](bad_news.png)
-
-
+### Додатково
+[Курс News Algorithms](https://journalismcourses.org/resource/alg0119.html) 
 
 
 
