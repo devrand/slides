@@ -9,13 +9,7 @@
 ![Із князі у грязі](http://ichef.bbci.co.uk/wwfeatures/wm/live/1600_900/images/live/p0/68/67/p06867yw.jpg)
 
 
-
-
-
-
-
-
-
+<br><br><br><br>
 
 # 2.
 
@@ -24,10 +18,14 @@
 ![латентні стилі](https://multithreaded.stitchfix.com/assets/posts/2018-06-28-latent-style/matrixfactorization.png)
 
 
+<br><br><br><br>
+
 # 3. 
 
 [Структуровані судові рішення](https://blog.doctrine.fr/structuring-legal-documents-with-deep-learning-2/)
 
+
+<br><br><br><br>
 
 # 4.
 
