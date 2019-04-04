@@ -21,8 +21,9 @@
 
 # 3. 
 
-[Структуровані судові рішення](https://blog.doctrine.fr/structuring-legal-documents-with-deep-learning/)
-(Create table of contents for millions of docs, paragraph classification task)
+[The Pudding, Коротка історія минулих 100 років](https://pudding.cool/2018/12/brief-history/)
+
+![](https://pudding.cool/2018/12/brief-history/assets/images/Maxomatic_Pudding_NYT_LAYERS.png)
 
 
 <br><br><br><br><br><br>
