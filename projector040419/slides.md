@@ -41,6 +41,7 @@
 # 5.
 
 Наш проект про [сміттєві сайти](http://texty.org.ua/d/2018/mnews/)
+
 ![picture](bad_news.png)
 
 <br><br><br><br><br><br>
@@ -48,6 +49,7 @@
 
 # 6. 
 [Як шукати тренди в новинах](https://www.tjpalanca.com/2017/03/facebook-news-topic-modeling.html) 
+
 ![тренди](https://www.tjpalanca.com/figures/20170309-news-landscape-map.png)
 
 
@@ -63,14 +65,11 @@
 <br><br><br><br><br><br>
 
 
-8. [GPT-2](https://openai.com/blog/better-language-models/) 
+8. [GPT-2](https://openai.com/blog/better-language-models/), 
 [TWDNE](https://www.gwern.net/TWDNE)
 
 
 ![](twdne.png)
-
-
-
 
 
 <br><br><br><br><br><br>
