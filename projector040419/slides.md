@@ -21,16 +21,36 @@
 
 # 3. 
 
-[Структуровані судові рішення](https://blog.doctrine.fr/structuring-legal-documents-with-deep-learning-2/)
+[Структуровані судові рішення](https://blog.doctrine.fr/structuring-legal-documents-with-deep-learning/)
+(Create table of contents for millions of docs, paragraph classification task)
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
+
+
 # 4.
 
+Самотній і сентиментальний (https://openai.com/blog/unsupervised-sentiment-neuron/), практичний [приклад](https://rakeshchada.github.io/Sentiment-Neuron.html). [Наш досвід](https://nadiarom.github.io/state_per_word/) 
 
-4. Самотній і сентиментальний (https://openai.com/blog/unsupervised-sentiment-neuron/ , https://rakeshchada.github.io/Sentiment-Neuron.html …) 
-5. Як шукати тренди в новинах (https://www.tjpalanca.com/2017/03/facebook-news-topic-modeling.html) 
+![сентиментальний нейрон]https://openai.com/content/images/2017/04/image03-1.png
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+5. [Як шукати тренди в новинах](https://www.tjpalanca.com/2017/03/facebook-news-topic-modeling.html) 
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
 6. Декілька прикладів від Дана Журавського, NLP для аналізу повсякденної мови (https://vimeo.com/193477678 ) 
-7. Курс News Algorithms (https://journalismcourses.org/resource/alg0119.html) 
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+7. [GPT-2](https://www.vox.com/future-perfect/2019/2/14/18222270/artificial-intelligence-open-ai-natural-language-processing), [Курс News Algorithms](https://journalismcourses.org/resource/alg0119.html) 
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
 8. Наш проект про сміттєві сайти (http://texty.org.ua/d/2018/mnews/ )
