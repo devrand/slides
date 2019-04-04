@@ -66,7 +66,7 @@
 <br><br><br><br><br><br>
 
 
-8. [GPT-2](https://openai.com/blog/better-language-models/), 
+8. Фейки [GPT-2](https://openai.com/blog/better-language-models/), 
 [TWDNE](https://www.gwern.net/TWDNE)
 
 
