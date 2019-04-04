@@ -33,12 +33,14 @@
 
 Самотній і сентиментальний (https://openai.com/blog/unsupervised-sentiment-neuron/), практичний [приклад](https://rakeshchada.github.io/Sentiment-Neuron.html). [Наш досвід](https://nadiarom.github.io/state_per_word/) 
 
-![сентиментальний нейрон]https://openai.com/content/images/2017/04/image03-1.png
+![сентиментальний нейрон](https://openai.com/content/images/2017/04/image03-1.png)
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 5. [Як шукати тренди в новинах](https://www.tjpalanca.com/2017/03/facebook-news-topic-modeling.html) 
+![тренди](https://www.tjpalanca.com/figures/20170309-news-landscape-map.png)
+
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
