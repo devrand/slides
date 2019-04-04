@@ -4,7 +4,9 @@
 
 
 # 1.  
-[Форма історій. Існує 6 універсальних форм, аналіз близько 2000 класичних творів](http://www.bbc.com/culture/story/20180525-every-story-in-the-world-has-one-of-these-six-basic-plots) 
+[Форма історій. Існує 6 універсальних форм, аналіз близько 2000 класичних творів](http://www.bbc.com/culture/story/20180525-every-story-in-the-world-has-one-of-these-six-basic-plots). [Практичний приклад, R](https://juliasilge.com/blog/you-must-allow-me/)
+
+![Із князі у грязі](http://ichef.bbci.co.uk/wwfeatures/wm/live/1600_900/images/live/p0/68/67/p06867yw.jpg)
 
 
 
