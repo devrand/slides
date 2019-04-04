@@ -9,6 +9,14 @@
 ![Із князі у грязі](http://ichef.bbci.co.uk/wwfeatures/wm/live/1600_900/images/live/p0/68/67/p06867yw.jpg)
 
 
+
+
+
+
+
+
+
+
 # 2.
 
 [StitchFix - моя улюблена фірма з продажі одягу](https://multithreaded.stitchfix.com/blog/)
